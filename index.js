@@ -4,12 +4,20 @@ const app = express();
 
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-
+const mongoose = require('mongoose');
 const port = process.env.PORT || 4000;
 
 const loginRoute = require('./api/routes/login');
 const jsonPatch = require('./api/routes/jsonpatch');
 const thumbnail = require('./api/routes/thumbnail');
+
+mongoose.connect('mongodb://localhost:27017/nodetask', {useNewUrlParser: true})
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+  console.log("mongoose connected successfully");
+});
 
 app.use(morgan('dev'));
 
