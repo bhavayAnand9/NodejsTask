@@ -12,6 +12,9 @@ const jsonPatch = require('./api/routes/jsonpatch');
 const thumbnail = require('./api/routes/thumbnail');
 
 mongoose.connect('mongodb://localhost:27017/nodetask', {useNewUrlParser: true})
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -30,7 +33,13 @@ app.use('/thumbnail', thumbnail);
 
 
 app.use((req, res, next)=> {
-	const error = new Error("Warning: Blackhole ahead, There's no coming back from there.");
+	Errors = [
+		"Error: 404 Warning: Blackhole ahead, There's no coming back from there.",
+		"Error: 404 You've reached at the end of the world.",
+		"Error: 404 That mouse is nibbling the wires again.",
+		"Error: 404 You're not supposed to be here, go home."
+	];
+	const error = new Error(Errors[Math.floor(Math.random()*Errors.length)]);
 	error.status = 404;
 	next(error);
 });
