@@ -1,21 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const checkAuth = require('../middleware/check-auth');
 
-// router.patch('/', (req, res, next)=>{
-// 	res.status(200).json({
-// 		message: "handling patch req to /jsonpatch"
-// 	});
-// });
+const JsonpatchController = require('../controllers/jsonpatch');
 
-router.post('/', (req, res, next)=>{
-	const jsonPatch = {
-		patch: req.body.patch
-	};
-	console.log(`patch received: ${req.body.patch}`);
-	res.status(200).json({
-		message: "handling patch req to /jsonpatch",
-		patchedData: 'send patched data' 
-	});
-});
+router.patch('/', checkAuth, JsonpatchController.jsonpatch);
 
 module.exports = router;

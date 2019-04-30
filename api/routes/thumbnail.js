@@ -1,22 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const checkAuth = require('../middleware/check-auth');
 
-// router.post('/', (req, res, next)=>{
-// 	res.status(200).json({
-// 		message: "handling post req to /thumbnail"
-// 	});
-// });
+const ThumbNailController = require('../controllers/thumbnail');
 
-
-router.post('/', (req, res, next)=>{
-	const thumbnail = {
-		url: req.body.url
-	};
-	console.log(`url received: ${req.body.url}`);
-	res.status(200).json({
-		message: "handling post req to /thumbnail",
-		url: 'will send image file' 
-	});
-});
+router.post('/', checkAuth, ThumbNailController.thumbnail);
 
 module.exports = router;
