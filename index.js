@@ -1,26 +1,30 @@
 const express = require('express');
-
-const app = express();
-
 const config = require('./config');
-
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const port = process.env.PORT || 4000;
+const fs = require('fs');
+const path = require('path');
 
-const loginRoute = require('./api/routes/login');
-const jsonPatch = require('./api/routes/patching');
-const thumbnail = require('./api/routes/thumbnail');
+//call express contructor
+const app = express();
 
-app.use(morgan('dev'));
+//for logging and monitoring
+//stream all logs to file `access.log`
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+app.use(morgan('combined', { stream: accessLogStream }))
+
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+//all express routes
+const loginRoute = require('./api/routes/login');
+const jsonPatch = require('./api/routes/patching');
+const thumbnail = require('./api/routes/thumbnail');
+
 app.use('/login', loginRoute);
 app.use('/jsonpatch', jsonPatch);
 app.use('/thumbnail', thumbnail);
-
 
 app.use((req, res, next)=> {
 	Errors = [
@@ -29,13 +33,11 @@ app.use((req, res, next)=> {
 		"Error: 404 That mouse is nibbling the wires again."
 	];
 	const error = new Error(Errors[Math.floor(Math.random()*Errors.length)]);
-	error.status = 404;
 	next(error);
 });
 
 app.use((error, req, res, next) => {
-	res.status(error.status || 500);
-	res.json({
+	res.status(404).json({
 		error: {
 			message: error.message
 		}
@@ -46,3 +48,6 @@ app.listen(config.port, (err)=>{
 	if(err)	throw err;
 	else console.log(`Server listening on post ${config.port}`);
 });
+
+//for testing purpose
+module.exports = app;
