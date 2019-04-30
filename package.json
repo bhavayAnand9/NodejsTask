@@ -10,12 +10,13 @@
   "author": "bhavay anand",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "express": "^4.16.4",
+    "jimp": "^0.6.4",
+    "jsonpatch": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.5.4",
     "morgan": "^1.9.1",
+    "node-fetch": "^2.4.1",
     "nodemon": "^1.18.11"
   }
 }

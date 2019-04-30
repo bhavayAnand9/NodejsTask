@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const port = process.env.PORT || 4000;
 
 const loginRoute = require('./api/routes/login');
-const jsonPatch = require('./api/routes/jsonpatch');
+const jsonPatch = require('./api/routes/patching');
 const thumbnail = require('./api/routes/thumbnail');
 
 app.use(morgan('dev'));

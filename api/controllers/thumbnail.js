@@ -1,11 +1,14 @@
-exports.thumbnail = (req, res, next)=>{
-	const thumbnail = {
-		url: req.body.url
-	};
-	console.log(`url received: ${req.body.url}`);
-	res.status(200).json({
-		message: "handling post req to /thumbnail",
-		url: 'will send image file',
-		userData: req.userData 
+const Jimp = require('jimp');
+const nodefetch = require('node-fetch');
+
+exports.thumbnail = async (req, res, next)=>{
+	const imgURL = req.body.url;
+
+	Jimp.read(imgURL, function(err,img){
+		if (err) throw err;
+		img.resize(50, 50).getBase64( Jimp.AUTO , function(e,img64){
+			if(e)throw e
+			res.status(200).send('<img src="'+img64+'">');
+		});
 	});
 }

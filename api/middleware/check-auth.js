@@ -1,11 +1,13 @@
 const jwt = require('jsonwebtoken');
+const config = require('../../config');
+
 
 module.exports = (req, res, next) => {
-    console.log('inside check-auth');
     console.log(req.headers.authorization.split(" ")[1]);
     try {
+        console.log('a');
         const token = req.headers.authorization.split(" ")[1];
-        const decoded = jwt.verify(token, 'secretKey');
+        const decoded = jwt.verify(token, config.secretKey);
         req.userData = decoded;
         console.log('calling next next');
         next();
