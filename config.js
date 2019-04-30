@@ -1,5 +1,5 @@
 const config = {
-    port: 4000,
+    port: 8080,
     secretKey: 'this is a node js task',
     env: 'prod'
 };

@@ -91,3 +91,4 @@
 ::1 - - [30/Apr/2019:12:16:10 +0000] "PATCH /jsonpatch HTTP/1.1" 200 41 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36"
 ::1 - - [30/Apr/2019:12:16:28 +0000] "PATCH /jsonpatch HTTP/1.1" 200 41 "-" "PostmanRuntime/7.11.0"
 ::1 - - [30/Apr/2019:12:17:38 +0000] "POST /thumbnail HTTP/1.1" 200 6838 "-" "PostmanRuntime/7.11.0"
+::1 - - [30/Apr/2019:12:39:05 +0000] "POST /login HTTP/1.1" 200 204 "-" "PostmanRuntime/7.11.0"
