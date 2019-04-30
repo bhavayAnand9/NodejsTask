@@ -95,4 +95,8 @@ It responds with base64 encoded 50x50 resized image data and the encoded data is
 * change `config.env` variable in `config.js` to `test` while running tests and to `prod` while serving the API.
 * now type `npm  start` to run the project or `npm test` to run test suite.`
 
-
+### To run with docker###
+* Type in terminal from root directory of project `docker build -t <your_user_name>/<project_name> .`
+* It'll pull all the required images from docker hub.
+* now type `docker run -p 49160:8080 -d <your_user_name>/<project_name>`
+* it'll map 8080 port inside of the container to the port 49160 on your machine.
