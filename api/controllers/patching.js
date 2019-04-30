@@ -1,3 +1,5 @@
+'use strict'
+
 const jsonpatch = require('jsonpatch');
 
 exports.jsonpatch = (req, res, next)=>{

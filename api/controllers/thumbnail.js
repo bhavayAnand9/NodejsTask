@@ -1,3 +1,5 @@
+'use strict'
+
 const Jimp = require('jimp');
 
 exports.thumbnail = async (req, res, next)=>{
